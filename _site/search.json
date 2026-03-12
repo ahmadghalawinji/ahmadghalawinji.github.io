@@ -35,13 +35,6 @@
     "text": "US Flight Delays (Bureau of Transportation Statistics)"
   },
   {
-    "objectID": "projects/airline-delay.html#tools",
-    "href": "projects/airline-delay.html#tools",
-    "title": "Airline Delay Analysis",
-    "section": "",
-    "text": "Python, pandas, SQL, Streamlit"
-  },
-  {
     "objectID": "projects/airline-delay.html#analysis-insights",
     "href": "projects/airline-delay.html#analysis-insights",
     "title": "Airline Delay Analysis",
