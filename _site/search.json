@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Projects\nWelcome! Here are some of my analytics projects:\n\nAirline Delay Analysis – Analyze flight delays by airline, airport, and time of day.\nMarketing Funnel Analysis – Examine user conversion, drop-offs, and marketing ROI."
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "Projects",
+    "section": "",
+    "text": "Projects\nWelcome! Here are some of my analytics projects:\n\nAirline Delay Analysis – Analyze flight delays by airline, airport, and time of day.\nMarketing Funnel Analysis – Examine user conversion, drop-offs, and marketing ROI."
+  },
+  {
+    "objectID": "projects/airline-delay.html",
+    "href": "projects/airline-delay.html",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "Analyze flight delays to identify patterns by airline, airport, and time of day.\n\n\n\nUS Flight Delays (Bureau of Transportation Statistics)\n\n\n\n\n\n\n   \n\n\n\n\nAirline X has the highest average delay\nAirport Y is the most congested\nMorning departures are generally more reliable\n\n\n\n\nLive Streamlit Dashboard\n\n\n\nView Code"
+  },
+  {
+    "objectID": "projects/airline-delay.html#problem",
+    "href": "projects/airline-delay.html#problem",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "Analyze flight delays to identify patterns by airline, airport, and time of day."
+  },
+  {
+    "objectID": "projects/airline-delay.html#dataset",
+    "href": "projects/airline-delay.html#dataset",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "US Flight Delays (Bureau of Transportation Statistics)"
+  },
+  {
+    "objectID": "projects/airline-delay.html#tools",
+    "href": "projects/airline-delay.html#tools",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "Python, pandas, SQL, Streamlit"
+  },
+  {
+    "objectID": "projects/airline-delay.html#analysis-insights",
+    "href": "projects/airline-delay.html#analysis-insights",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "Airline X has the highest average delay\nAirport Y is the most congested\nMorning departures are generally more reliable"
+  },
+  {
+    "objectID": "projects/airline-delay.html#dashboard",
+    "href": "projects/airline-delay.html#dashboard",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "Live Streamlit Dashboard"
+  },
+  {
+    "objectID": "projects/airline-delay.html#github",
+    "href": "projects/airline-delay.html#github",
+    "title": "Airline Delay Analysis",
+    "section": "",
+    "text": "View Code"
+  },
+  {
+    "objectID": "projects/marketing-funnel.html",
+    "href": "projects/marketing-funnel.html",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "Analyze ecommerce user sessions to understand drop-offs and marketing channel effectiveness.\n\n\n\nOpen ecommerce dataset / Kaggle user sessions data\n\n\n\nPython, pandas, SQL, Streamlit\n\n\n\n\nConversion drops most at the “Add to Cart” step\nPaid social channels have higher CAC but better ROI\nCohort analysis shows retention decreases after day 7\n\n\n\n\nLive Streamlit Dashboard\n\n\n\nView Code"
+  },
+  {
+    "objectID": "projects/marketing-funnel.html#problem",
+    "href": "projects/marketing-funnel.html#problem",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "Analyze ecommerce user sessions to understand drop-offs and marketing channel effectiveness."
+  },
+  {
+    "objectID": "projects/marketing-funnel.html#dataset",
+    "href": "projects/marketing-funnel.html#dataset",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "Open ecommerce dataset / Kaggle user sessions data"
+  },
+  {
+    "objectID": "projects/marketing-funnel.html#tools",
+    "href": "projects/marketing-funnel.html#tools",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "Python, pandas, SQL, Streamlit"
+  },
+  {
+    "objectID": "projects/marketing-funnel.html#analysis-insights",
+    "href": "projects/marketing-funnel.html#analysis-insights",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "Conversion drops most at the “Add to Cart” step\nPaid social channels have higher CAC but better ROI\nCohort analysis shows retention decreases after day 7"
+  },
+  {
+    "objectID": "projects/marketing-funnel.html#dashboard",
+    "href": "projects/marketing-funnel.html#dashboard",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "Live Streamlit Dashboard"
+  },
+  {
+    "objectID": "projects/marketing-funnel.html#github",
+    "href": "projects/marketing-funnel.html#github",
+    "title": "Marketing Funnel Analysis",
+    "section": "",
+    "text": "View Code"
+  }
+]
