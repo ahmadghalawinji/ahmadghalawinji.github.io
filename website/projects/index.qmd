@@ -1,0 +1,6 @@
+# Projects
+
+Welcome! Here are some of my analytics projects:
+
+- [Airline Delay Analysis](airline-delay.qmd) – Analyze flight delays by airline, airport, and time of day.
+- [Marketing Funnel Analysis](marketing-funnel.qmd) – Examine user conversion, drop-offs, and marketing ROI.

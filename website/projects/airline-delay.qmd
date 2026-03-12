@@ -1,0 +1,25 @@
+# Airline Delay Analysis
+
+## Problem
+Analyze flight delays to identify patterns by airline, airport, and time of day.
+
+## Dataset
+US Flight Delays (Bureau of Transportation Statistics)
+
+## Tools
+## Tools
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![pandas](https://img.shields.io/badge/pandas-1.5.3-lightgrey)
+![SQL](https://img.shields.io/badge/SQL-PostgreSQL-003366)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.26-orange)
+
+## Analysis & Insights
+- Airline X has the highest average delay
+- Airport Y is the most congested
+- Morning departures are generally more reliable
+
+## Dashboard
+[Live Streamlit Dashboard](https://share.streamlit.io/yourusername/airline-delay-app/main)
+
+## GitHub
+[View Code](https://github.com/yourusername/airline-delay-analysis)

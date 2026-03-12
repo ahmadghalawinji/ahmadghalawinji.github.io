@@ -1,0 +1,21 @@
+# Marketing Funnel Analysis
+
+## Problem
+Analyze ecommerce user sessions to understand drop-offs and marketing channel effectiveness.
+
+## Dataset
+Open ecommerce dataset / Kaggle user sessions data
+
+## Tools
+Python, pandas, SQL, Streamlit
+
+## Analysis & Insights
+- Conversion drops most at the “Add to Cart” step
+- Paid social channels have higher CAC but better ROI
+- Cohort analysis shows retention decreases after day 7
+
+## Dashboard
+[Live Streamlit Dashboard](https://share.streamlit.io/yourusername/marketing-funnel-app/main)
+
+## GitHub
+[View Code](https://github.com/yourusername/marketing-funnel-analysis)
