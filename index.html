@@ -5,85 +5,103 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ahmad Ghalawinji — Data Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  /* ── RESET ────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* ── TOKENS ───────────────────────────── */
   :root {
-    --ink: #1a1a16;
-    --ink-soft: #2e2e28;
-    --muted: #5a5a52;
-    --faint: #9a9a90;
-    --rule: #e4e4dc;
-    --rule-light: #eeeeea;
-    --bg: #f8f7f2;
-    --bg-warm: #f2f0e8;
-    --accent: #c8a96e;
-    --accent-dim: #d4bc8f;
-    --mono: 'JetBrains Mono', monospace;
+    --bg:           #ffffff;
+    --bg-soft:      #f9f9f7;
+    --bg-muted:     #f3f2ee;
+    --border:       #e4e3de;
+    --border-light: #eeede8;
+
+    --ink:          #18181b;
+    --ink-soft:     #27272a;
+    --muted:        #71717a;
+    --faint:        #a1a1aa;
+
+    --accent:       #b5863a;
+    --accent-dim:   #d4bc8f;
+    --accent-bg:    rgba(181, 134, 58, 0.07);
+
+    --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --serif: 'Lora', Georgia, serif;
+    --mono:  'JetBrains Mono', monospace;
+
+    --nav-h:     60px;
+    --section-y: 5rem;
+    --max-w:     800px;
+    --radius:    6px;
   }
 
+  /* ── GLOBALS ──────────────────────────── */
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 72px;
+    scroll-padding-top: calc(var(--nav-h) + 16px);
   }
 
-  ::selection { background: rgba(200, 169, 110, 0.22); color: var(--ink); }
+  ::selection { background: rgba(181, 134, 58, 0.15); color: var(--ink); }
 
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
 
-  /* ─── BASE ─────────────────────────────────── */
   body {
-    font-family: var(--serif);
-    font-size: 19px;
-    line-height: 1.8;
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
     color: var(--ink);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ─── NOISE TEXTURE OVERLAY ────────────────── */
   body::before {
     content: '';
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    opacity: 0.025;
+    opacity: 0.018;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-size: 200px;
   }
 
-  /* ─── NAV ───────────────────────────────────── */
+  /* ── NAV ──────────────────────────────── */
   nav {
     position: sticky; top: 0;
-    background: rgba(248, 247, 242, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
+    height: var(--nav-h);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
     padding: 0 2.5rem;
     display: flex; align-items: center; justify-content: space-between;
-    height: 56px; z-index: 100;
+    z-index: 100;
+    transition: box-shadow 0.3s, border-color 0.3s;
+  }
+  nav.scrolled {
+    box-shadow: 0 1px 16px rgba(0, 0, 0, 0.06);
+    border-bottom-color: var(--border);
   }
 
   .nav-name {
     font-family: var(--mono); font-size: 12px;
     letter-spacing: 0.06em; color: var(--ink); text-decoration: none;
-    transition: color 0.2s;
+    font-weight: 500; transition: color 0.2s;
   }
   .nav-name:hover { color: var(--accent); }
 
-  .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
-    font-family: var(--mono); font-size: 11px;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--faint); text-decoration: none; transition: color 0.2s;
-    position: relative;
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s; position: relative; padding-bottom: 2px;
   }
   .nav-links a::after {
-    content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
-    height: 1px; background: var(--accent);
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 1.5px; background: var(--accent);
     transform: scaleX(0); transform-origin: left;
     transition: transform 0.25s ease;
   }
@@ -92,7 +110,7 @@
   .nav-links a:hover::after,
   .nav-links a.active::after { transform: scaleX(1); }
 
-  /* ─── HAMBURGER ──────────────────────────── */
+  /* hamburger */
   .nav-toggle {
     display: none; flex-direction: column; justify-content: center;
     gap: 5px; background: none; border: none; cursor: pointer;
@@ -106,300 +124,279 @@
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-  @media (max-width: 600px) {
-    .nav-toggle { display: flex; }
-    .nav-links {
-      display: none; position: absolute; top: 56px; left: 0; right: 0;
-      flex-direction: column; gap: 0;
-      background: rgba(248, 247, 242, 0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--rule);
-      padding: 0.5rem 1.5rem 1rem;
-      z-index: 99;
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { border-bottom: 1px solid var(--rule-light); }
-    .nav-links a { display: block; padding: 0.75rem 0; font-size: 12px; }
+  /* ── LAYOUT ───────────────────────────── */
+  main {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    position: relative; z-index: 1;
   }
 
-  /* ─── LAYOUT ─────────────────────────────── */
-  main { max-width: 780px; margin: 0 auto; padding: 0 2.5rem; position: relative; z-index: 1; }
-
-  section { padding: 5.5rem 0; border-bottom: 1px solid var(--rule); }
+  section {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--border-light);
+  }
   section:last-child { border-bottom: none; }
 
+  /* ── SECTION LABEL ────────────────────── */
   .section-label {
-    font-family: var(--mono); font-size: 13px;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 3rem;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 2.5rem;
     display: flex; align-items: center; gap: 1rem;
   }
   .section-label::after {
-    content: ''; flex: 1;
-    height: 1px;
+    content: ''; flex: 1; height: 1px;
     background: linear-gradient(to right, var(--accent-dim), transparent);
   }
 
-  /* ─── HERO ANIMATIONS ───────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ─── HERO ───────────────────────────────── */
-  #about { padding-top: 7rem; padding-bottom: 5.5rem; }
+  /* ── HERO ─────────────────────────────── */
+  #about { padding-top: 6rem; }
 
   .hero-top {
     display: flex; align-items: flex-start;
-    gap: 2.75rem; margin-bottom: 2.25rem;
-    animation: fadeUp 0.75s ease both;
+    gap: 2.5rem; margin-bottom: 2rem;
+    animation: fadeUp 0.65s ease both;
   }
 
-  .photo-wrap {
-    position: relative; flex-shrink: 0;
-  }
+  .photo-wrap { position: relative; flex-shrink: 0; }
   .photo-wrap img {
-    width: 118px; height: 118px; border-radius: 50%;
+    width: 110px; height: 110px; border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--rule);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--border), 0 4px 24px rgba(0,0,0,0.09);
     display: block;
-    transition: box-shadow 0.35s ease;
-  }
-  .photo-wrap:hover img {
-    box-shadow: 0 6px 32px rgba(200, 169, 110, 0.22), 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.35s;
   }
   .photo-wrap::before {
     content: '';
     position: absolute; inset: -5px;
     border-radius: 50%;
-    border: 1px solid var(--accent-dim);
+    border: 1px dashed var(--accent-dim);
     opacity: 0.5;
-    transition: opacity 0.35s ease, inset 0.35s ease;
+    transition: opacity 0.35s, inset 0.35s;
   }
-  .photo-wrap:hover::before {
-    opacity: 1; inset: -7px;
+  .photo-wrap:hover::before { opacity: 1; inset: -8px; }
+  .photo-wrap:hover img {
+    box-shadow: 0 0 0 1px var(--accent-dim), 0 6px 32px rgba(181,134,58,0.18);
   }
 
-  .hero-text { padding-top: 4px; }
+  .hero-text { padding-top: 6px; }
 
   .hero-intro {
-    font-family: var(--mono); font-size: 11px;
-    letter-spacing: 0.1em; color: var(--faint); margin-bottom: 0.6rem;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 0.45rem;
     display: flex; align-items: center; gap: 0.6rem;
   }
-  .hero-intro::before {
-    content: ''; width: 18px; height: 1px; background: var(--faint);
-  }
+  .hero-intro::before { content: ''; width: 18px; height: 1px; background: var(--accent-dim); }
 
   h1 {
-    font-size: clamp(2.4rem, 5.5vw, 3.5rem);
-    font-weight: 300; line-height: 1.1;
-    letter-spacing: -0.01em;
-    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 400; line-height: 1.1;
+    letter-spacing: -0.01em; color: var(--ink);
+    margin-bottom: 0.5rem;
   }
-  h1 em {
-    font-style: italic; font-weight: 300;
-    color: var(--muted);
+  h1 em { font-style: italic; font-weight: 400; color: var(--muted); }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.03em;
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 100px; padding: 3px 10px;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #22c55e;
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.35; }
   }
 
   .bio {
-    font-size: 1rem; color: var(--muted);
-    max-width: 600px; margin-bottom: 2.25rem;
-    line-height: 1.85; font-weight: 300;
-    animation: fadeUp 0.75s ease 0.15s both;
+    font-size: 0.96rem; color: var(--muted);
+    max-width: 580px; margin-bottom: 2rem;
+    line-height: 1.82;
+    animation: fadeUp 0.65s ease 0.1s both;
   }
 
   .links-row {
-    display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; margin-top: 0.5rem;
-    animation: fadeUp 0.75s ease 0.28s both;
+    display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center;
+    animation: fadeUp 0.65s ease 0.2s both;
   }
 
   .link-btn {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.07em;
-    color: var(--bg); text-decoration: none;
-    background: var(--ink);
-    padding: 10px 24px; border-radius: 4px;
-    transition: all 0.3s ease;
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    border: 1px solid var(--ink);
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    color: #fff; text-decoration: none;
+    background: var(--ink); border: 1.5px solid var(--ink);
+    padding: 8px 18px; border-radius: var(--radius);
+    transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
   }
   .link-btn:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(200, 169, 110, 0.2);
+    background: var(--accent); border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(181, 134, 58, 0.28);
   }
 
   .link-plain {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
     color: var(--muted); text-decoration: none;
-    border-bottom: 2px solid transparent; padding-bottom: 2px;
-    transition: all 0.3s ease;
-    display: inline-flex; align-items: center; gap: 0.6rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 8px 4px; transition: color 0.2s;
   }
-  .link-plain:hover { color: var(--ink); border-color: var(--accent); }
+  .link-plain:hover { color: var(--ink); }
 
-  .link-icon { width: 16px; height: 16px; opacity: 0.8; transition: opacity 0.2s, transform 0.2s; }
-  .link-btn:hover .link-icon { opacity: 1; transform: scale(1.15); }
-  .link-plain:hover .link-icon { opacity: 1; transform: scale(1.2); }
+  .link-icon { width: 15px; height: 15px; transition: transform 0.2s; flex-shrink: 0; }
+  .link-btn:hover .link-icon,
+  .link-plain:hover .link-icon { transform: scale(1.12); }
 
-  /* ─── EXPERIENCE ─────────────────────────── */
-  .exp-list { display: flex; flex-direction: column; gap: 3rem; }
+  /* ── EXPERIENCE ───────────────────────── */
+  .exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
 
   .exp-item {
-    padding: 2rem 2rem 1.75rem;
-    border: 1px solid var(--rule-light);
-    border-radius: 4px;
-    background: rgba(255,255,255,0.5);
-    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    padding: 1.75rem 2rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    transition: border-color 0.2s, border-left-color 0.2s, box-shadow 0.2s, transform 0.15s;
     position: relative;
-  }
-  .exp-item::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; border-radius: 4px 0 0 4px;
-    background: var(--accent-dim);
-    opacity: 0; transition: opacity 0.25s;
   }
   .exp-item:hover {
     border-color: var(--accent-dim);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-left-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
     transform: translateY(-1px);
   }
-  .exp-item:hover::before { opacity: 1; }
 
   .exp-header {
     display: grid; grid-template-columns: 1fr auto;
-    align-items: start; gap: 1rem; margin-bottom: 0.75rem;
+    align-items: start; gap: 1rem; margin-bottom: 0.85rem;
   }
-  .exp-title { font-size: 1.05rem; font-weight: 500; color: var(--ink-soft); }
-  .exp-org { font-size: 0.9rem; color: var(--accent); font-style: italic; margin-bottom: 0; }
-  .exp-org a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: color 0.2s, border-color 0.2s; }
-  .exp-org a:hover { color: var(--ink); border-color: var(--accent); }
+
+  .exp-title { font-size: 0.95rem; font-weight: 600; color: var(--ink); display: block; margin-bottom: 0.15rem; }
+  .exp-org { font-size: 0.875rem; color: var(--accent); font-style: normal; margin-bottom: 0; }
+  .exp-org a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid rgba(181, 134, 58, 0.3);
+    transition: border-color 0.2s;
+  }
+  .exp-org a:hover { border-color: var(--accent); }
+
+  .exp-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem; }
   .exp-date {
-    font-family: var(--mono); font-size: 10.5px;
-    color: var(--faint); white-space: nowrap;
-    background: var(--bg-warm);
-    padding: 2px 8px; border-radius: 2px;
+    font-family: var(--mono); font-size: 10px; color: var(--faint);
+    white-space: nowrap; background: var(--bg-soft);
+    padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border-light);
   }
+  .exp-location { font-family: var(--mono); font-size: 10px; color: var(--faint); }
 
-  .exp-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem; }
-  .exp-location { font-family: var(--mono); font-size: 10.5px; color: var(--faint); }
-
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
   .exp-bullets li {
-    font-size: 0.92rem; color: var(--muted);
-    padding-left: 1.2rem; position: relative; line-height: 1.7;
-    font-weight: 300;
+    font-size: 0.88rem; color: var(--muted);
+    padding-left: 1.2rem; position: relative; line-height: 1.65;
   }
   .exp-bullets li::before {
-    content: ''; position: absolute; left: 0; top: 0.65em;
+    content: ''; position: absolute; left: 0; top: 0.72em;
     width: 5px; height: 1px; background: var(--accent-dim);
   }
+  .exp-bullets strong { color: var(--ink-soft); font-weight: 600; }
 
-  .tech-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.85rem; }
+  .tech-row { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 1rem; }
   .tag {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em;
-    color: var(--faint); border: 1px solid var(--rule);
-    padding: 2px 8px; border-radius: 2px;
-    background: var(--bg);
-    transition: color 0.15s, border-color 0.15s;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.03em;
+    color: var(--muted); border: 1px solid var(--border);
+    padding: 2px 8px; border-radius: 3px;
+    background: var(--bg-soft);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
   }
   .exp-item:hover .tag,
-  .project-item:hover .tag { color: var(--muted); border-color: var(--accent-dim); }
+  .project-item:hover .tag {
+    color: var(--ink-soft); border-color: var(--accent-dim); background: var(--accent-bg);
+  }
 
-  /* ─── EDUCATION ───────────────────────────── */
-  .edu-list { display: flex; flex-direction: column; gap: 2.25rem; }
+  /* ── EDUCATION ────────────────────────── */
+  .edu-list { display: flex; flex-direction: column; }
 
   .edu-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0 1.5rem;
-    padding-bottom: 2.25rem;
-    border-bottom: 1px solid var(--rule-light);
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 0 1.5rem; padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-light);
     align-items: start;
   }
+  .edu-item:first-child { padding-top: 0; }
   .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
 
-  .edu-main {}
-  .edu-degree { font-size: 1.0rem; font-weight: 500; color: var(--ink-soft); margin-bottom: 0.2rem; }
-  .edu-info { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.15rem; }
-  .edu-school { font-style: italic; }
-  .edu-school a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); transition: color 0.2s, border-color 0.2s; }
+  .edu-degree { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+  .edu-info { font-size: 0.875rem; color: var(--muted); margin-bottom: 0.1rem; }
+  .edu-school a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s;
+  }
   .edu-school a:hover { color: var(--ink); border-color: var(--accent); }
-  .edu-courses { font-size: 0.85rem; color: var(--faint); }
+  .edu-courses { font-size: 0.8rem; color: var(--faint); margin-top: 0.2rem; }
 
-  .edu-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem; }
-  .edu-location { font-size: 0.9rem; color: var(--muted); font-style: italic; }
+  .edu-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem; }
+  .edu-location { font-size: 0.8rem; color: var(--muted); }
+  .edu-year { font-family: var(--mono); font-size: 10px; color: var(--faint); white-space: nowrap; }
 
-  .edu-year {
-    font-family: var(--mono); font-size: 10.5px; color: var(--faint);
-    white-space: nowrap; padding-top: 3px;
-    text-align: right;
+  /* ── PROJECTS ─────────────────────────── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.25rem;
   }
 
-  /* ─── PROJECTS ──────────────────────────── */
   .project-item {
-    padding: 2rem 2rem 1.75rem;
-    border: 1px solid var(--rule-light);
-    border-radius: 4px;
-    background: rgba(255,255,255,0.5);
-    display: grid; grid-template-columns: 1fr;
-    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s, background 0.25s;
-    position: relative;
-    margin-bottom: 1.5rem;
-  }
-  .project-item::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; border-radius: 4px 0 0 4px;
-    background: var(--accent-dim);
-    opacity: 0; transition: opacity 0.25s;
+    padding: 1.75rem;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    transition: border-color 0.2s, border-left-color 0.2s, box-shadow 0.2s, transform 0.15s;
   }
   .project-item:hover {
     border-color: var(--accent-dim);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transform: translateY(-1px);
-    background: rgba(255,255,255,0.75);
+    border-left-color: var(--accent);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
   }
-  .project-item:hover::before { opacity: 1; }
-  .project-item:last-child { margin-bottom: 0; }
 
   .project-title {
-    font-size: 1.05rem; font-weight: 500;
-    margin-bottom: 0.5rem; color: var(--ink-soft);
-    display: flex; align-items: center;
+    font-size: 0.92rem; font-weight: 600;
+    margin-bottom: 0.6rem; color: var(--ink);
   }
   .project-title a {
     color: inherit; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 0.25rem 0.5rem; border-radius: 3px;
-    transition: background 0.2s, color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: color 0.2s;
   }
-  .project-title a:hover { background: rgba(200, 169, 110, 0.1); color: var(--accent); }
+  .project-title a:hover { color: var(--accent); }
 
-  .github-icon { width: 20px; height: 20px; opacity: 0.8; transition: opacity 0.2s, transform 0.2s; flex-shrink: 0; }
+  .github-icon { width: 15px; height: 15px; opacity: 0.55; transition: opacity 0.2s, transform 0.2s; flex-shrink: 0; }
   .project-title a:hover .github-icon { opacity: 1; transform: scale(1.1); }
 
-  .project-desc {
-    font-size: 0.92rem; color: var(--muted);
-    margin-bottom: 0.75rem; line-height: 1.75; font-weight: 300;
-  }
+  .project-desc { font-size: 0.86rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.7; }
 
-  /* ─── SKILLS ────────────────────────────── */
+  /* ── SKILLS ───────────────────────────── */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 2rem 2.5rem;
   }
 
   .skill-group {
-    background: rgba(255,255,255,0.55);
-    border: 1px solid var(--rule-light);
-    border-radius: 4px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
     padding: 1.4rem 1.5rem 1.25rem;
-    transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
   }
   .skill-group:hover {
     border-color: var(--accent-dim);
@@ -409,47 +406,41 @@
 
   .skill-group h3 {
     font-family: var(--mono); font-size: 10px;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--rule);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.85rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
   }
 
   .skill-group ul { list-style: none; }
   .skill-group li {
-    font-size: 0.92rem; color: var(--muted);
-    padding: 4px 0; display: flex; align-items: center; gap: 10px;
-    font-weight: 300;
-    border-bottom: 1px solid transparent;
+    font-size: 0.875rem; color: var(--muted);
+    padding: 3px 0; display: flex; align-items: center; gap: 8px;
     transition: color 0.15s, padding-left 0.15s;
   }
   .skill-group li:hover { color: var(--ink-soft); padding-left: 4px; }
   .skill-group li::before {
-    content: ''; width: 3px; height: 3px; border-radius: 50%;
+    content: ''; width: 4px; height: 4px; border-radius: 50%;
     background: var(--accent-dim); flex-shrink: 0;
   }
 
-  /* ─── CONTACT ────────────────────────────── */
+  /* ── CONTACT ──────────────────────────── */
   .contact-intro {
-    font-size: 1rem; color: var(--muted);
-    max-width: 520px; margin-bottom: 2.5rem;
-    line-height: 1.85; font-weight: 300;
+    font-size: 0.96rem; color: var(--muted);
+    max-width: 520px; margin-bottom: 2rem; line-height: 1.8;
   }
 
-  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
   .contact-list li {
-    display: flex; align-items: center; gap: 1.25rem;
-    padding: 1rem 1.25rem; border-radius: 4px;
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.875rem 1.25rem; border-radius: var(--radius);
     border: 1px solid transparent; transition: all 0.2s;
-    background: transparent;
   }
   .contact-list li:hover {
-    background: rgba(200, 169, 110, 0.08);
+    background: var(--accent-bg);
     border-color: var(--accent-dim);
-    transform: translateX(4px);
   }
 
-  .contact-icon { width: 20px; height: 20px; flex-shrink: 0; opacity: 0.7; transition: opacity 0.2s; }
+  .contact-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.6; transition: opacity 0.2s; }
   .contact-list li:hover .contact-icon { opacity: 1; }
 
   .contact-label {
@@ -457,54 +448,75 @@
     letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--accent); min-width: 60px; flex-shrink: 0;
   }
-
   .contact-list a {
-    font-size: 0.93rem; color: var(--muted); text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1px;
-    transition: color 0.2s, border-color 0.2s;
-    font-weight: 300;
-    flex: 1;
+    font-size: 0.9rem; color: var(--muted); text-decoration: none;
+    border-bottom: 1px solid var(--border); padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s; flex: 1;
   }
   .contact-list a:hover { color: var(--ink); border-color: var(--accent); }
-  .contact-val { font-size: 0.93rem; color: var(--muted); font-weight: 300; flex: 1; }
+  .contact-val { font-size: 0.9rem; color: var(--muted); flex: 1; }
 
-  /* ─── FOOTER ─────────────────────────────── */
+  /* ── FOOTER ───────────────────────────── */
   footer {
-    max-width: 780px; margin: 0 auto; padding: 2.5rem 2.5rem 4rem;
-    font-family: var(--mono); font-size: 10.5px; color: var(--faint);
+    max-width: var(--max-w);
+    margin: 0 auto; padding: 2rem 2.5rem 3.5rem;
+    font-family: var(--mono); font-size: 10px; color: var(--faint);
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
-    border-top: 1px solid var(--rule-light);
+    border-top: 1px solid var(--border-light);
     position: relative; z-index: 1;
   }
 
-  /* ─── SCROLL REVEAL ───────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ─── CODE ───────────────────────────────── */
+  /* ── CODE ─────────────────────────────── */
   code {
-    font-family: var(--mono); font-size: 0.82em;
-    background: var(--bg-warm); border: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 0.8em;
+    background: var(--bg-muted); border: 1px solid var(--border);
     border-radius: 3px; padding: 1px 5px; color: var(--ink-soft);
   }
 
-  /* ─── RESPONSIVE ─────────────────────────── */
-  @media (max-width: 600px) {
-    nav { padding: 0 1.5rem; position: relative; }
-    main { padding: 0 1.5rem; }
-    .hero-top { flex-direction: column; gap: 1.75rem; }
-    .exp-item { padding: 1.5rem; }
+  /* ── ANIMATIONS ───────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ───────────────────────── */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none; position: absolute; top: var(--nav-h); left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1.5rem 1rem;
+      z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-bottom: 1px solid var(--border-light); }
+    .nav-links a { display: block; padding: 0.75rem 0; }
+
+    main { padding: 0 1.25rem; }
+    #about { padding-top: 4rem; }
+    h1 { font-size: 2rem; }
+    .hero-top { flex-direction: column; gap: 1.5rem; }
+    .exp-item { padding: 1.25rem 1.5rem; }
     .edu-item { grid-template-columns: 1fr; }
-    .edu-year { text-align: left; padding-top: 0; }
-    footer { padding: 2rem 1.5rem 3rem; }
+    .edu-right { align-items: flex-start; margin-top: 0.25rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem 1.25rem 2.5rem; }
+  }
+
+  @media (min-width: 641px) and (max-width: 900px) {
+    main { padding: 0 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -512,7 +524,7 @@
 
 <nav>
   <a href="#about" class="nav-name">Ahmad Ghalawinji</a>
-  <button class="nav-toggle" aria-label="Toggle navigation">
+  <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links">
@@ -536,6 +548,7 @@
       <div class="hero-text">
         <p class="hero-intro">Data Engineer</p>
         <h1>Ahmad <em>Ghalawinji</em></h1>
+        <span class="hero-badge">Available to start</span>
       </div>
     </div>
 
@@ -545,7 +558,6 @@
       machine learning, and research — from building production pipelines at Amadeus
       to studying representation learning at Inria. I am actively looking for opportunities
       in data engineering and data science, and open to doctoral research collaborations.
-      Available to start immediately.
     </p>
 
     <div class="links-row">
@@ -556,7 +568,7 @@
         </svg>
         Get in touch
       </a>
-      <a class="link-plain" href="https://linkedin.com/in/ahmadghalawinji" target="_blank">
+      <a class="link-plain" href="https://linkedin.com/in/ahmad-ghalawinji" target="_blank" rel="noopener noreferrer">
         <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.721-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.045-8.733 0-9.652h3.554v1.366c.43-.666 1.198-1.61 2.920-1.61 2.135 0 3.753 1.395 3.753 4.402v5.494zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.955.77-1.715 1.921-1.715 1.152 0 1.918.76 1.925 1.715 0 .953-.773 1.715-1.931 1.715zm1.581 11.597H3.715V9.505h3.203v10.947zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
         </svg>
@@ -588,14 +600,16 @@
           </div>
         </div>
         <ul class="exp-bullets">
-          <li>Enhanced forecasting accuracy for the Revenue Management System by integrating competitor pricing features into the ML Boosted Forecast (MLBF).</li>
-          <li>Designed and implemented a data pipeline in Databricks to extract and incorporate competitor pricing data, improving predictive quality.</li>
-          <li>Achieved a 4% improvement in forecast accuracy, resulting in a 0.4% increase in revenue.</li>
+          <li>Extended the ML Boosted Forecast (MLBF) for airline Revenue Management by integrating competitor pricing signals from three data sources (DP Competition Prices, MongoDB travel data, and MLBF datasets).</li>
+          <li>Built a PySpark pipeline on Databricks reducing the raw schema from 150 → 30 columns across 700+ partitions; engineered min/max/avg/std/median features across 7 time windows (60–1440 min before departure).</li>
+          <li>Used SHAP to identify the highest-impact feature (<code>min_competitor_price_depdate_1200</code>) and added a competition-pressure correction term to the MLBF purchase probability equation.</li>
+          <li>Best model: <strong>34.3% RMSE improvement</strong> on departure-date forecasts and <strong>12.9%</strong> on days-before-departure — estimated <strong>~$120M revenue uplift</strong> for a $30B airline.</li>
         </ul>
         <div class="tech-row">
-          <span class="tag">Python</span><span class="tag">MongoDB</span>
-          <span class="tag">Azure</span><span class="tag">Spark</span>
-          <span class="tag">Databricks</span>
+          <span class="tag">Python</span><span class="tag">PySpark</span>
+          <span class="tag">Databricks</span><span class="tag">Azure</span>
+          <span class="tag">MongoDB</span><span class="tag">SHAP</span>
+          <span class="tag">Feature Engineering</span>
         </div>
       </div>
 
@@ -690,81 +704,87 @@
   <!-- PROJECTS -->
   <section id="projects">
     <p class="section-label">Projects</p>
+    <div class="projects-grid">
 
-    <div class="project-item reveal">
-      <p class="project-title">
-        <a href="https://github.com/ahmadghalawinji/port-calls-modeling-assignment" target="_blank" rel="noopener noreferrer">
-          <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          Port Calls Detection &amp; Vessel Journey Modelling
-        </a>
-      </p>
-      <p class="project-desc">
-        End-to-end pipeline that detects vessel port arrivals and departures from 27,000+ AIS position records across 16 ports. Uses geodesic geofencing (20 km threshold) and time-gap deduplication to identify port call events, then infers each vessel's next destination via a SQL <code>LEAD()</code> window function.
-      </p>
-      <div class="tech-row">
-        <span class="tag">Python</span><span class="tag">Apache Airflow</span><span class="tag">PostgreSQL</span><span class="tag">Streamlit</span><span class="tag">Docker</span><span class="tag">GeoPy</span>
+      <div class="project-item reveal">
+        <p class="project-title">
+          <a href="https://github.com/ahmadghalawinji/port-calls-modeling-assignment" target="_blank" rel="noopener noreferrer">
+            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Port Calls Detection &amp; Vessel Journey Modelling
+          </a>
+        </p>
+        <p class="project-desc">
+          End-to-end pipeline that detects vessel port arrivals and departures from 27,000+ AIS position records across 16 ports. Uses geodesic geofencing (20 km threshold) and time-gap deduplication to identify port call events, then infers each vessel's next destination via a SQL <code>LEAD()</code> window function.
+        </p>
+        <div class="tech-row">
+          <span class="tag">Python</span><span class="tag">Apache Airflow</span><span class="tag">PostgreSQL</span><span class="tag">Streamlit</span><span class="tag">Docker</span><span class="tag">GeoPy</span>
+        </div>
       </div>
-    </div>
 
-    <div class="project-item reveal">
-      <p class="project-title">
-        <a href="https://github.com/ahmadghalawinji/product-analytics-platform" target="_blank" rel="noopener noreferrer">
-          <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          Product Analytics Platform — Music Streaming Pipeline
-        </a>
-      </p>
-      <p class="project-desc">
-        End-to-end analytics pipeline processing 1M+ events from a simulated music streaming service.
-        Generated synthetic user data with Python and Faker, loaded it into AWS S3 as a partitioned
-        data lake, modeled it in Amazon Redshift using dbt, and built a QuickSight dashboard
-        with KPI cards, trend lines, and event breakdowns.
-      </p>
-      <div class="tech-row">
-        <span class="tag">Python</span><span class="tag">Faker</span>
-        <span class="tag">AWS S3</span><span class="tag">Amazon Redshift</span>
-        <span class="tag">dbt</span><span class="tag">Amazon QuickSight</span><span class="tag">SQL</span>
+      <div class="project-item reveal">
+        <p class="project-title">
+          <a href="https://github.com/ahmadghalawinji/product-analytics-platform" target="_blank" rel="noopener noreferrer">
+            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Product Analytics Platform — Music Streaming Pipeline
+          </a>
+        </p>
+        <p class="project-desc">
+          End-to-end analytics pipeline processing 1M+ events from a simulated music streaming service.
+          Generated synthetic user data with Python and Faker, loaded it into AWS S3 as a partitioned
+          data lake, modeled it in Amazon Redshift using dbt, and built a QuickSight dashboard
+          with KPI cards, trend lines, and event breakdowns.
+        </p>
+        <div class="tech-row">
+          <span class="tag">Python</span><span class="tag">Faker</span>
+          <span class="tag">AWS S3</span><span class="tag">Amazon Redshift</span>
+          <span class="tag">dbt</span><span class="tag">Amazon QuickSight</span><span class="tag">SQL</span>
+        </div>
       </div>
-    </div>
 
-    <div class="project-item reveal">
-      <p class="project-title"><a href="#">
-          <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          Fairness in Classification — COMPAS Dataset
-        </a></p>
-      <p class="project-desc">
-        Analyzed COMPAS recidivism scores using the ProPublica dataset. Detected and quantified
-        racial bias in the predictions, then compared multiple classifiers to identify the
-        most equitable model across demographic groups.
-      </p>
-      <div class="tech-row">
-        <span class="tag">Python</span><span class="tag">scikit-learn</span>
-        <span class="tag">NumPy</span><span class="tag">Feature Engineering</span>
+      <div class="project-item reveal">
+        <p class="project-title">
+          <a href="#">
+            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Fairness in Classification — COMPAS Dataset
+          </a>
+        </p>
+        <p class="project-desc">
+          Analyzed COMPAS recidivism scores using the ProPublica dataset. Detected and quantified
+          racial bias in the predictions, then compared multiple classifiers to identify the
+          most equitable model across demographic groups.
+        </p>
+        <div class="tech-row">
+          <span class="tag">Python</span><span class="tag">scikit-learn</span>
+          <span class="tag">NumPy</span><span class="tag">Feature Engineering</span>
+        </div>
       </div>
-    </div>
 
-    <div class="project-item reveal">
-      <p class="project-title"><a href="#">
-          <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          Big Data Analysis — Google VM Activities
-        </a></p>
-      <p class="project-desc">
-        Analyzed large-scale Google virtual machine activity logs using Apache Spark on GCP.
-        Extracted usage patterns and resource allocation trends from high-volume event streams.
-      </p>
-      <div class="tech-row">
-        <span class="tag">Apache Spark</span><span class="tag">Python</span>
-        <span class="tag">GCP</span><span class="tag">Linux</span>
+      <div class="project-item reveal">
+        <p class="project-title">
+          <a href="#">
+            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            Big Data Analysis — Google VM Activities
+          </a>
+        </p>
+        <p class="project-desc">
+          Analyzed large-scale Google virtual machine activity logs using Apache Spark on GCP.
+          Extracted usage patterns and resource allocation trends from high-volume event streams.
+        </p>
+        <div class="tech-row">
+          <span class="tag">Apache Spark</span><span class="tag">Python</span>
+          <span class="tag">GCP</span><span class="tag">Linux</span>
+        </div>
       </div>
-    </div>
 
+    </div>
   </section>
 
   <!-- SKILLS -->
@@ -858,7 +878,7 @@
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.721-2.004 1.418-.103.249-.129.597-.129.946v5.441h-3.554s.045-8.733 0-9.652h3.554v1.366c.43-.666 1.198-1.61 2.920-1.61 2.135 0 3.753 1.395 3.753 4.402v5.494zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.955.77-1.715 1.921-1.715 1.152 0 1.918.76 1.925 1.715 0 .953-.773 1.715-1.931 1.715zm1.581 11.597H3.715V9.505h3.203v10.947zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
         </svg>
         <span class="contact-label">LinkedIn</span>
-        <a href="https://linkedin.com/in/ahmadghalawinji" target="_blank">Ahmad Ghalawinji</a>
+        <a href="https://linkedin.com/in/ahmad-ghalawinji" target="_blank" rel="noopener noreferrer">Ahmad Ghalawinji</a>
       </li>
       <li>
         <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
@@ -879,13 +899,17 @@
 </footer>
 
 <script>
+  // Nav scroll shadow
+  const navbar = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 60);
+        setTimeout(() => entry.target.classList.add('visible'), 60);
         observer.unobserve(entry.target);
       }
     });
@@ -904,7 +928,7 @@
         if (active) active.classList.add('active');
       }
     });
-  }, { threshold: 0.25, rootMargin: '-56px 0px 0px 0px' });
+  }, { threshold: 0.25, rootMargin: '-60px 0px 0px 0px' });
   sections.forEach(s => navObserver.observe(s));
 
   // Hamburger menu
