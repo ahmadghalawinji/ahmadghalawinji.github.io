@@ -347,42 +347,60 @@
   .edu-year { font-family: var(--mono); font-size: 10px; color: var(--faint); white-space: nowrap; }
 
   /* ── PROJECTS ─────────────────────────── */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 1.25rem;
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
   .project-item {
-    padding: 1.75rem;
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--bg);
-    transition: border-color 0.2s, border-left-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-light);
+    display: flex; flex-direction: column;
+    transition: background 0.2s;
   }
-  .project-item:hover {
-    border-color: var(--accent-dim);
-    border-left-color: var(--accent);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-    transform: translateY(-2px);
+  .project-item:first-child { padding-top: 0; }
+  .project-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .project-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 0.75rem;
+    margin-bottom: 0.65rem;
   }
 
   .project-title {
     font-size: 0.92rem; font-weight: 600;
-    margin-bottom: 0.6rem; color: var(--ink);
+    color: var(--ink); flex: 1;
   }
-  .project-title a {
-    color: inherit; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    transition: color 0.2s;
+
+  .project-links {
+    display: flex; gap: 0.35rem; flex-shrink: 0;
   }
-  .project-title a:hover { color: var(--accent); }
 
-  .github-icon { width: 15px; height: 15px; opacity: 0.55; transition: opacity 0.2s, transform 0.2s; flex-shrink: 0; }
-  .project-title a:hover .github-icon { opacity: 1; transform: scale(1.1); }
+  .proj-link {
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+    flex-shrink: 0;
+  }
+  .proj-link:hover {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-bg);
+    transform: translateY(-1px);
+  }
+  .proj-link svg { width: 13px; height: 13px; display: block; }
 
-  .project-desc { font-size: 0.86rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.7; }
+  .project-desc {
+    font-size: 0.86rem; color: var(--muted);
+    margin-bottom: 1rem; line-height: 1.7;
+    flex: 1;
+  }
 
   /* ── SKILLS ───────────────────────────── */
   .skills-grid {
@@ -704,17 +722,43 @@
   <!-- PROJECTS -->
   <section id="projects">
     <p class="section-label">Projects</p>
-    <div class="projects-grid">
+    <div class="projects-list">
 
       <div class="project-item reveal">
-        <p class="project-title">
-          <a href="https://github.com/ahmadghalawinji/port-calls-modeling-assignment" target="_blank" rel="noopener noreferrer">
-            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            Port Calls Detection &amp; Vessel Journey Modelling
-          </a>
+        <div class="project-header">
+          <p class="project-title">Climate Change &amp; Youth Cardiorespiratory Fitness</p>
+          <div class="project-links">
+            <a class="proj-link" href="https://github.com/ahmadghalawinji/climate-crf-forecaster-prototype" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a class="proj-link" href="https://github.com/ahmadghalawinji/climate-crf-forecaster-prototype/blob/main/Report.pdf" target="_blank" rel="noopener noreferrer" title="Report PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+            </a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Prototype research pipeline for the SUPER Horizon Europe project. Integrates ERA5 climate data,
+          World Bank socioeconomic indicators, and HEPA policy scores; generates synthetic VO2max values
+          using physiological assumptions; trains Random Forest, XGBoost, and Linear Regression models;
+          and simulates +1°C to +3°C warming scenarios with physical activity mitigation analysis.
+          Includes an interactive Streamlit dashboard.
         </p>
+        <div class="tech-row">
+          <span class="tag">Python</span><span class="tag">scikit-learn</span>
+          <span class="tag">XGBoost</span><span class="tag">Streamlit</span>
+          <span class="tag">ERA5</span><span class="tag">Pandas</span><span class="tag">Plotly</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-header">
+          <p class="project-title">Port Calls Detection &amp; Vessel Journey Modelling</p>
+          <div class="project-links">
+            <a class="proj-link" href="https://github.com/ahmadghalawinji/port-calls-modeling-assignment" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
         <p class="project-desc">
           End-to-end pipeline that detects vessel port arrivals and departures from 27,000+ AIS position records across 16 ports. Uses geodesic geofencing (20 km threshold) and time-gap deduplication to identify port call events, then infers each vessel's next destination via a SQL <code>LEAD()</code> window function.
         </p>
@@ -724,14 +768,14 @@
       </div>
 
       <div class="project-item reveal">
-        <p class="project-title">
-          <a href="https://github.com/ahmadghalawinji/product-analytics-platform" target="_blank" rel="noopener noreferrer">
-            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            Product Analytics Platform — Music Streaming Pipeline
-          </a>
-        </p>
+        <div class="project-header">
+          <p class="project-title">Product Analytics Platform — Music Streaming Pipeline</p>
+          <div class="project-links">
+            <a class="proj-link" href="https://github.com/ahmadghalawinji/product-analytics-platform" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
         <p class="project-desc">
           End-to-end analytics pipeline processing 1M+ events from a simulated music streaming service.
           Generated synthetic user data with Python and Faker, loaded it into AWS S3 as a partitioned
@@ -742,45 +786,6 @@
           <span class="tag">Python</span><span class="tag">Faker</span>
           <span class="tag">AWS S3</span><span class="tag">Amazon Redshift</span>
           <span class="tag">dbt</span><span class="tag">Amazon QuickSight</span><span class="tag">SQL</span>
-        </div>
-      </div>
-
-      <div class="project-item reveal">
-        <p class="project-title">
-          <a href="#">
-            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            Fairness in Classification — COMPAS Dataset
-          </a>
-        </p>
-        <p class="project-desc">
-          Analyzed COMPAS recidivism scores using the ProPublica dataset. Detected and quantified
-          racial bias in the predictions, then compared multiple classifiers to identify the
-          most equitable model across demographic groups.
-        </p>
-        <div class="tech-row">
-          <span class="tag">Python</span><span class="tag">scikit-learn</span>
-          <span class="tag">NumPy</span><span class="tag">Feature Engineering</span>
-        </div>
-      </div>
-
-      <div class="project-item reveal">
-        <p class="project-title">
-          <a href="#">
-            <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            Big Data Analysis — Google VM Activities
-          </a>
-        </p>
-        <p class="project-desc">
-          Analyzed large-scale Google virtual machine activity logs using Apache Spark on GCP.
-          Extracted usage patterns and resource allocation trends from high-volume event streams.
-        </p>
-        <div class="tech-row">
-          <span class="tag">Apache Spark</span><span class="tag">Python</span>
-          <span class="tag">GCP</span><span class="tag">Linux</span>
         </div>
       </div>
 
