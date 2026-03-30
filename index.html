@@ -150,7 +150,16 @@
     font-family: var(--mono); font-size: 11px;
     letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 2.5rem;
-    display: flex; align-items: center; gap: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 1px;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    opacity: 0.8;
   }
   .section-label::after {
     content: ''; flex: 1; height: 1px;
@@ -165,11 +174,13 @@
   #about::before {
     content: '';
     position: absolute;
-    top: 0; left: -2.5rem; right: -2.5rem; height: 440px;
-    background: radial-gradient(ellipse 65% 55% at 12% 35%,
-      rgba(168, 124, 50, 0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 50% at 85% 20%,
-      rgba(168, 124, 50, 0.03) 0%, transparent 60%);
+    top: 0; left: -2.5rem; right: -2.5rem; height: 500px;
+    background: radial-gradient(ellipse 75% 60% at 10% 30%,
+      rgba(168, 124, 50, 0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 45% 55% at 88% 15%,
+      rgba(168, 124, 50, 0.055) 0%, transparent 60%),
+      radial-gradient(ellipse 35% 40% at 55% 85%,
+      rgba(168, 124, 50, 0.03) 0%, transparent 65%);
     pointer-events: none; z-index: 0;
   }
   #about > * { position: relative; z-index: 1; }
@@ -227,7 +238,7 @@
     letter-spacing: -0.015em; color: var(--ink);
     margin-bottom: 0.6rem;
   }
-  h1 em { font-style: italic; font-weight: 400; color: var(--muted); }
+  h1 em { font-style: italic; font-weight: 400; color: var(--accent-mid); }
 
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
@@ -244,7 +255,7 @@
   }
 
   .bio {
-    font-size: 0.955rem; color: var(--muted);
+    font-size: 0.955rem; color: var(--ink-soft);
     max-width: 580px; margin-bottom: 2.25rem;
     line-height: 1.85;
     animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
@@ -258,25 +269,33 @@
   .link-btn {
     font-family: var(--sans); font-size: 13px; font-weight: 500;
     color: #fff; text-decoration: none;
-    background: var(--ink); border: 1.5px solid var(--ink);
+    background: linear-gradient(135deg, #232120 0%, #1c1a18 100%);
+    border: 1.5px solid #2a2725;
     padding: 8px 20px; border-radius: var(--radius);
-    transition: background 0.22s, border-color 0.22s, transform 0.15s, box-shadow 0.22s;
+    transition: background 0.28s, border-color 0.28s, transform 0.18s, box-shadow 0.28s;
     display: inline-flex; align-items: center; gap: 0.5rem;
     letter-spacing: 0.01em;
   }
   .link-btn:hover {
-    background: var(--accent); border-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, #7d5c1c 100%);
+    border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--accent-glow);
+    box-shadow: 0 6px 24px var(--accent-glow);
   }
 
   .link-plain {
     font-family: var(--sans); font-size: 13px; font-weight: 500;
     color: var(--muted); text-decoration: none;
     display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 8px 4px; transition: color 0.2s;
+    padding: 8px 10px; border-radius: var(--radius);
+    border: 1px solid transparent;
+    transition: color 0.2s, background 0.2s, border-color 0.2s;
   }
-  .link-plain:hover { color: var(--ink); }
+  .link-plain:hover {
+    color: var(--ink);
+    background: var(--bg-soft);
+    border-color: var(--border);
+  }
 
   .link-icon { width: 15px; height: 15px; transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); flex-shrink: 0; }
   .link-btn:hover .link-icon { transform: scale(1.15) translateY(-1px); }
@@ -300,6 +319,7 @@
     border-left-color: var(--accent);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
+    background: linear-gradient(160deg, var(--accent-bg) 0%, var(--bg) 55%);
   }
 
   .exp-header {
@@ -382,13 +402,19 @@
   }
 
   .project-item {
-    padding: 2rem 0;
+    padding: 1.75rem 1.25rem;
     border-bottom: 1px solid var(--border-light);
+    border-radius: var(--radius);
     display: flex; flex-direction: column;
-    transition: background 0.2s;
+    transition: background 0.22s, box-shadow 0.22s;
+    margin: 0 -1.25rem;
   }
-  .project-item:first-child { padding-top: 0; }
-  .project-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .project-item:first-child { padding-top: 1.25rem; }
+  .project-item:last-child { border-bottom: none; }
+  .project-item:hover {
+    background: var(--bg-soft);
+    box-shadow: var(--shadow-sm);
+  }
 
   .project-header {
     display: flex; align-items: flex-start;
@@ -410,17 +436,18 @@
     width: 28px; height: 28px;
     border-radius: 4px;
     border: 1px solid var(--border);
-    background: var(--bg-soft);
+    background: var(--bg);
     color: var(--muted);
     text-decoration: none;
-    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.18s, box-shadow 0.2s;
     flex-shrink: 0;
   }
   .proj-link:hover {
     color: var(--accent);
     border-color: var(--accent-dim);
     background: var(--accent-bg);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--accent-glow);
   }
   .proj-link svg { width: 13px; height: 13px; display: block; }
 
@@ -454,7 +481,12 @@
     font-family: var(--mono); font-size: 10px;
     letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 0.85rem;
-    padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+    padding-bottom: 0.55rem; position: relative;
+  }
+  .skill-group h3::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, var(--accent-dim), transparent);
   }
 
   .skill-group ul { list-style: none; }
@@ -826,6 +858,33 @@
         </p>
         <div class="tech-row">
           <span class="tag">Python</span><span class="tag">Apache Airflow</span><span class="tag">PostgreSQL</span><span class="tag">Streamlit</span><span class="tag">Docker</span><span class="tag">GeoPy</span>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-header">
+          <p class="project-title">Trend Oracle — News Q&amp;A System with RAG</p>
+          <div class="project-links">
+            <a class="proj-link" href="https://github.com/ahmadghalawinji/trend-oracle" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a class="proj-link" href="https://github.com/ahmadghalawinji/trend-oracle/blob/main/Trend_Oracle_Report.pdf" target="_blank" rel="noopener noreferrer" title="Report PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+            </a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Fully local news Q&amp;A system collecting articles from five international RSS feeds (BBC, Al Jazeera,
+          Guardian, France 24, NYT), scraping full body text, and applying NLP pipelines for sentiment analysis
+          and named entity recognition. Uses a RAG architecture with MiniLM embeddings and ChromaDB as a vector
+          store for natural-language queries with cited sources. Complete data pipeline with DuckDB for structured
+          queries, containerised with Docker Compose, and an interactive Gradio interface with streaming responses.
+        </p>
+        <div class="tech-row">
+          <span class="tag">Python</span><span class="tag">spaCy</span>
+          <span class="tag">HuggingFace</span><span class="tag">ChromaDB</span>
+          <span class="tag">DuckDB</span><span class="tag">Ollama</span>
+          <span class="tag">Gradio</span><span class="tag">Docker</span>
         </div>
       </div>
 
