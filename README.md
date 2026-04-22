@@ -13,8 +13,10 @@ Single-page site built with plain HTML, CSS, and vanilla JS. No frameworks, no b
 ## Structure
 
 ```
-index.html                        # Everything — markup, styles, and scripts
-ahmad_ghalawinji.jpg              # Profile photo
-Ahmad_Ghalawinji_Research_CV.pdf  # Research-oriented CV
-Ahmad_Ghalawinji_Industry_CV.pdf  # Industry-oriented CV
+index.html                            # English site — markup, styles, scripts
+fr/index.html                         # French site — same, localized
+assets/
+  ahmad_ghalawinji.jpg                # Profile photo
+  Ahmad_Ghalawinji_Research_CV.pdf    # Research-oriented CV
+  Ahmad_Ghalawinji_Industry_CV.pdf    # Industry-oriented CV
 ```
